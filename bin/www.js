@@ -11,8 +11,8 @@ var path = require('path');
 var https = require('https');
 var http = require('http');
 
-var httpsPort = 5887; // 自定义数字端口，给https用的端口
-var httpPort = 3000; // 自定义数字端口
+var httpsPort = 443; // 自定义数字端口，给https用的端口
+var httpPort = 80; // 自定义数字端口
 // 1、创建https服务器
 var privateKey = fs.readFileSync(path.join(__dirname, './1538108319871.key'), 'utf8');
 var certificate = fs.readFileSync(path.join(__dirname, './1538108319871.pem'), 'utf8');
