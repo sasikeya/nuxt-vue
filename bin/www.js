@@ -6,13 +6,26 @@
 
 var app = require('../app');
 var debug = require('debug')('myapp:server');
+var fs = require('fs');
+var path = require('path');
+var https = require('https');
 var http = require('http');
 
+var httpsPort = 5887; // 自定义数字端口，给https用的端口
+var httpPort = 5888; // 自定义数字端口
+// 1、创建https服务器
+var privateKey = fs.readFileSync(path.join(__dirname, './1538108319871.key'), 'utf8');
+var certificate = fs.readFileSync(path.join(__dirname, './1538108319871.pem'), 'utf8');
+var credentials = { key: privateKey, cert: certificate };
+var httpsServer = https.createServer(credentials, app);
+httpsServer.listen(httpsPort, function () {
+  console.log('HTTPS Server is running on: https://localhost:%s', httpsPort);
+});
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '80');
+var port = normalizePort(process.env.PORT || httpPort);
 app.set('port', port);
 
 /**
